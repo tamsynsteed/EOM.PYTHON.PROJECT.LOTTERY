@@ -22,6 +22,7 @@ def qualify():
          messagebox.showwarning("Verification Unsuccessful","Note: Only persons over the age of 18 may enter the National Lottery.\n \nEnsure that you have keyd in a number.")
 
 
+
     else:
 
         if age >= 18:
@@ -37,8 +38,6 @@ def qualify():
 
         window.withdraw()
         import Qualify_lotto
-
-
 
 
 

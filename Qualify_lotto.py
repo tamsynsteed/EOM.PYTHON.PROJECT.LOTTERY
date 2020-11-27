@@ -7,6 +7,7 @@ window.title("Lottery Entry")
 window.configure(background="#dedede", relief="solid")
 window.geometry("650x650")
 import random
+userNumbers = set()
 #we want the user to input 6 numbers
 def user_list():
     userNumbers = set()
@@ -30,11 +31,12 @@ def user_list():
         userNumbers.add(number6)
     except ValueError:
         messagebox.showerror("Invalid Entries", "Please check for duplicates or empty textboxes.\n\nEnsure that all entries are numerical values.")
+        userNumbers=(0)
+
 
     for i in userNumbers:
         if i > 49:
             messagebox.showerror("Invalid Entry", "Numbers cannot be greater than 49")
-            userNumbers=(0)
 
 
     else:
