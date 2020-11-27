@@ -1,15 +1,45 @@
 from tkinter import *
 from tkinter import simpledialog ,messagebox
+from datetime import datetime
+#create main window and style it. Add a title, sizing etc
+window=Tk()
+window.title("Lottery Entry")
+window.configure(background="#dedede", relief="solid")
+window.geometry("650x650")
+
+
+today= datetime.today().strftime('%Y-%m-%d')
 
 
 def qualify():
-    age = int(entry1.get())
+    try:
+        age = int(entry1.get())
 
-    if age < 18:
-         messagebox.showwarning("Alert!", "You do not qualify: Only persons over the age of 18 may enter the National Lottery.")
+        if age < 18:
+            raise ValueError
 
-    elif age >= 18:
-        messagebox.showinfo("Verified.", "You qualify to take part in the National Lottery.")
+    except ValueError as e:
+         messagebox.showwarning("Verification Unsuccessful","Note: Only persons over the age of 18 may enter the National Lottery.\n \nEnsure that you have keyd in a number.")
+
+
+    else:
+
+        if age >= 18:
+            messagebox.showinfo("Verified.", "You qualify to take part in the National Lottery.")
+
+        file=open('/home/user/Desktop/lotto.txt','w')
+        file.write(
+        "Player:" + str(entryname.get())+" "+str(entrysurname.get()+"\n"+
+        "Age:" + str(entry1.get())+"\n"+
+        "Email:" + str(entry_email.get())+"\n"+
+        "Date Played:"+str(today)))
+        file.close()
+
+        window.withdraw()
+        import Qualify_lotto
+
+
+
 
 
 def exit():
@@ -19,11 +49,7 @@ def exit():
     else:
         return  None
 
-#create main window and style it. Add a title, sizing etc
-window=Tk()
-window.title("Lottery Entry")
-window.configure(background="#dedede", relief="solid")
-window.geometry("650x650")
+
 
 
 labelHeading = Label(window,text="National Lottery | Home", font="arial 18 bold", bg="yellow")
@@ -44,8 +70,8 @@ entryname.pack()
 label3=Label(window, text="Surname:", font="arial 14")
 label3.pack(pady=10)
 
-entryname= Entry(window)
-entryname.pack()
+entrysurname= Entry(window)
+entrysurname.pack()
 
 label4=Label(window, text="Age:", font="arial 14")
 label4.pack(pady=10)
